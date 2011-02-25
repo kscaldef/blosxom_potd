@@ -14,9 +14,7 @@ the template variables:
 
 =head1 VERSION
 
-0+1i
-
-1st test release
+0.01
 
 =head1 Customization
 
@@ -72,7 +70,8 @@ L<http://www.tbray.org/ongoing/>
 POTD Blosxom Plug-in
 Copyright 2005, Kevin Scaldeferri
 
-This code is released under the same license as Perl, namely the Artistic
-License: L<http://www.perl.com/pub/a/language/misc/Artistic.html>.  (Note that this is different from the license which Blosxom is distributed under.)
-
-
+This code is released under the same license as Perl, namely the
+Artistic License:
+L<http://www.perl.com/pub/a/language/misc/Artistic.html>.  (Note that
+this is different from the license which Blosxom is distributed
+under.)
