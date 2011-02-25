@@ -1,0 +1,78 @@
+=head1 NAME
+
+Blosxom Plug-in: potd (picture of the day)
+
+=head1 SYNOPSIS
+
+Randomly selects a photo that has been posted in the blog to be
+the "picture of the day" (for an arbitrary value of day).  Provides
+the template variables:
+
+  * $potd::potd -- the URL to the POTD
+  * $potd::potd_source -- permalink to the entry containing the POTD
+
+
+=head1 VERSION
+
+0+1i
+
+1st test release
+
+=head1 Customization
+
+=head2 Configuration variables
+
+C<$image_pattern> is a regular expression used to pick images which
+may be candidates for the POTD.  The intent is typically to restrict
+to images hosted in the same URL space as the blog, although the default
+is simply any file with a jpg, jpeg, or gif suffix.
+
+C<$from_pattern> and C<$to_pattern> are used to transform the original
+url of the image in order to generate the POTD. This would typically
+be used if you want to display full-size images in the main blog and
+thumbnails for the POTD.  If either pattern is undef, no
+transformation will be done
+
+C<$cache_expire> is the frequency with which to pick a new POTD.  The
+default is 1 day.  This can be set to 0 to disable caching and pick a
+new image for each request.
+
+C<$debug_level> can be set to a value between 0 and 5; 0 will output
+no debug information, while 5 will be very verbose.  The default is 1,
+and should be changed after you've verified the plugin is working
+correctly.
+
+=head1 AUTHOR
+
+Kevin Scaldeferri (kevin+blosxom at scaldeferri dot com)
+L<http://kevin.scaldeferri.com/>
+
+=head1 BUGS
+
+Probably; address bug reports and comments to me or to the Blosxom
+mailing list L<http://www.yahoogroups.com/groups/blosxom>.
+
+=head1 TODO
+
+=over
+
+=item * make img tag parsing more robust
+
+=item * provide potd_alt containing any alt text for the image
+
+=back
+
+=head1 Giving Credit
+
+The basic concept for this plugin was stolen from Tim Bray's "Ongoing",
+L<http://www.tbray.org/ongoing/>
+
+=head1 LICENSE
+
+POTD Blosxom Plug-in
+Copyright 2005, Kevin Scaldeferri
+
+This code is released under the same license as Perl, namely the Artistic
+License: L<http://www.perl.com/pub/a/language/misc/Artistic.html>.  (Note that this is different from the license which Blosxom is distributed under.)
+
+
