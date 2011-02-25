@@ -1,6 +1,6 @@
 # Blosxom Plugin: potd                                     -*- perl -*-
 # Author: Kevin Scaldeferri (kevin+blosxom at scaldeferri dot com)
-# Version: 0+1i
+# Version: 0.01
 # Blosxom Home/Docs/Licensing: http://www.blosxom.com/
 
 package potd;
@@ -12,36 +12,31 @@ use warnings;
 # --- Configuration Variables ---
 
 # pattern to use to match local image URLs in stories
-#my $image_pattern = qr/\.(jpg|jpeg|gif)/;
-my $image_pattern = qr#http://kevin.scaldeferri.com/[\w\./-]*\.(?:jpg|jpeg|gif)#;
+my $image_pattern = qr/\.(jpg|jpeg|gif)/;
 
 # these two patterns are used to transform the name of the image
 # to generate the POTD.  This would typically be used if you
 # want to display full images in the main blog and thumbnails
 # for the POTD.  If either pattern is undef, no transformation will
 # be done
-
-#my $from_pattern = "\.";            # find first '.'
-#my $to_pattern   = "-thumbnail.";   # put '-thumbnail' before it
-my $from_pattern = qr/-300\./;
-my $to_pattern   = "-200.";
+my $from_pattern = "\.";            # find first '.'
+my $to_pattern   = "-thumbnail.";   # put '-thumbnail' before it
 
 # frequency to pick a new POTD.  Set to 0 to pick a new image
 # for every page load
 my $cache_expire = 60 * 60 * 24;
-#my $cache_expire = 0;
 
 # use category-based or date-based permalinks
-my $date_based_permalinks = 1;
+my $date_based_permalinks = 0;
 
 # Set to 0 for no debugging or 5 for maximum verbosity
 # or somewhere in between for something in between
-my $debug_level = 0;
+my $debug_level = 1;
 
 # -------------------------------
 
 
-# 
+#
 # Variables exported to templates
 #
 use vars qw($potd $potd_source);
@@ -61,9 +56,9 @@ sub debug {
 
 sub transform_image_name {
   my $original = shift;
-  
+
   if (defined($from_pattern) && defined($to_pattern)) {
-    $original =~ s/$from_pattern/$to_pattern/o; 
+    $original =~ s/$from_pattern/$to_pattern/o;
   }
 
   return $original;
@@ -156,7 +151,7 @@ sub filter {
 
     my $image = $images[int(rand(scalar @images))];
     debug(5, "original image is $image");
-  
+
     $potd = transform_image_name($image);
     debug(1, "potd is $potd");
 
@@ -201,9 +196,7 @@ the template variables:
 
 =head1 VERSION
 
-0+1i
-
-1st test release
+0.01
 
 =head1 Customization
 
@@ -211,7 +204,7 @@ the template variables:
 
 C<$image_pattern> is a regular expression used to pick images which
 may be candidates for the POTD.  The intent is typically to restrict
-to images hosted in the same URL space as the blog, although the default 
+to images hosted in the same URL space as the blog, although the default
 is simply any file with a jpg, jpeg, or gif suffix.
 
 C<$from_pattern> and C<$to_pattern> are used to transform the original
@@ -220,7 +213,7 @@ be used if you want to display full-size images in the main blog and
 thumbnails for the POTD.  If either pattern is undef, no
 transformation will be done
 
-C<$cache_expire> is the frequency with which to pick a new POTD.  The 
+C<$cache_expire> is the frequency with which to pick a new POTD.  The
 default is 1 day.  This can be set to 0 to disable caching and pick a
 new image for each request.
 
@@ -251,7 +244,7 @@ mailing list L<http://www.yahoogroups.com/groups/blosxom>.
 
 =head1 Giving Credit
 
-The basic concept for this plugin was stolen from Tim Bray's "Ongoing", 
+The basic concept for this plugin was stolen from Tim Bray's "Ongoing",
 L<http://www.tbray.org/ongoing/>
 
 =head1 LICENSE
@@ -259,7 +252,10 @@ L<http://www.tbray.org/ongoing/>
 POTD Blosxom Plug-in
 Copyright 2005, Kevin Scaldeferri
 
-This code is released under the same license as Perl, namely the Artistic
-License: L<http://www.perl.com/pub/a/language/misc/Artistic.html>.  (Note that this is different from the license which Blosxom is distributed under.)
+This code is released under the same license as Perl, namely the
+Artistic License:
+L<http://www.perl.com/pub/a/language/misc/Artistic.html>.  (Note that
+this is different from the license which Blosxom is distributed
+under.)
 
 
